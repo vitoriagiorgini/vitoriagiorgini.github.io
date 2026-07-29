@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vitória Giorgini — Desenvolvedora Full Stack</title>
  
-<!-- Importação da fonte Clash Display -->
 <link href="https://fonts.cdnfonts.com/css/clash-display" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
  
-<!-- React e Bibliotecas (ScrollTrigger removido para evitar travamentos) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
@@ -65,10 +63,8 @@
   }
   .cursor-blink { animation: blink 1.1s step-end infinite; }
  
-  /* Classe para forçar a fonte */
   .font-clash { font-family: 'Clash Display', sans-serif !important; }
   
-  /* Classes para a animação de scroll nativa (à prova de travamentos) */
   .reveal-item {
     opacity: 0;
     transform: translateY(30px);
@@ -103,91 +99,22 @@ const Icon = ({ path, className = "w-5 h-5", size }) => (
   </svg>
 );
  
-const IconGithub = (p) => (
-  <Icon {...p} path={
-    <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.4 0C6.1 3.3 5 3.6 5 3.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 3.6 10c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.1-.5 2V21" />
-  } />
-);
-const IconLinkedin = (p) => (
-  <Icon {...p} path={<>
-    <path d="M4 4h16v16H4z" opacity="0" />
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <path d="M8 11v5M8 8v.01M12 16v-5m0 0c0-1.5 1-2.5 2.5-2.5S17 9.5 17 11v5" />
-  </>} />
-);
-const IconMail = (p) => (
-  <Icon {...p} path={<>
-    <rect x="3" y="5" width="18" height="14" rx="2" />
-    <path d="m4 7 8 6 8-6" />
-  </>} />
-);
-const IconArrowRight = (p) => (
-  <Icon {...p} path={<>
-    <path d="M5 12h14" />
-    <path d="m13 6 6 6-6 6" />
-  </>} />
-);
-const IconExternalLink = (p) => (
-  <Icon {...p} path={<>
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" y1="14" x2="21" y2="3" />
-  </>} />
-);
+const IconGithub = (p) => <Icon {...p} path={<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.4 0C6.1 3.3 5 3.6 5 3.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 3.6 10c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.1-.5 2V21" />} />;
+const IconLinkedin = (p) => <Icon {...p} path={<><path d="M4 4h16v16H4z" opacity="0" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 11v5M8 8v.01M12 16v-5m0 0c0-1.5 1-2.5 2.5-2.5S17 9.5 17 11v5" /></>} />;
+const IconMail = (p) => <Icon {...p} path={<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></>} />;
+const IconArrowRight = (p) => <Icon {...p} path={<><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>} />;
+const IconExternalLink = (p) => <Icon {...p} path={<><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></>} />;
  
 const ArrowRight = IconArrowRight;
 const Mail = IconMail;
  
-const IconServer = (p) => (
-  <Icon {...p} path={<>
-    <rect x="2" y="2" width="20" height="8" rx="2" />
-    <rect x="2" y="14" width="20" height="8" rx="2" />
-    <line x1="6" y1="6" x2="6.01" y2="6" />
-    <line x1="6" y1="18" x2="6.01" y2="18" />
-  </>} />
-);
-const IconBraces = (p) => (
-  <Icon {...p} path={<>
-    <path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2" />
-    <path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2" />
-  </>} />
-);
-const IconCode = (p) => (
-  <Icon {...p} path={<>
-    <polyline points="16 18 22 12 16 6" />
-    <polyline points="8 6 2 12 8 18" />
-  </>} />
-);
-const IconCoffee = (p) => (
-  <Icon {...p} path={<>
-    <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
-    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
-    <line x1="6" y1="2" x2="6" y2="4" />
-    <line x1="10" y1="2" x2="10" y2="4" />
-    <line x1="14" y1="2" x2="14" y2="4" />
-  </>} />
-);
-const IconDatabase = (p) => (
-  <Icon {...p} path={<>
-    <ellipse cx="12" cy="5" rx="9" ry="3" />
-    <path d="M3 5v14a9 3 0 0 0 18 0V5" />
-    <path d="M3 12a9 3 0 0 0 18 0" />
-  </>} />
-);
-const IconTable = (p) => (
-  <Icon {...p} path={<>
-    <path d="M12 3v18" />
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <path d="M3 9h18" />
-    <path d="M3 15h18" />
-  </>} />
-);
-const IconBrain = (p) => (
-  <Icon {...p} path={<>
-    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
-    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
-  </>} />
-);
+const IconServer = (p) => <Icon {...p} path={<><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></>} />;
+const IconBraces = (p) => <Icon {...p} path={<><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2" /><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2" /></>} />;
+const IconCode = (p) => <Icon {...p} path={<><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>} />;
+const IconCoffee = (p) => <Icon {...p} path={<><path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" /><line x1="6" y1="2" x2="6" y2="4" /><line x1="10" y1="2" x2="10" y2="4" /><line x1="14" y1="2" x2="14" y2="4" /></>} />;
+const IconDatabase = (p) => <Icon {...p} path={<><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v14a9 3 0 0 0 18 0V5" /><path d="M3 12a9 3 0 0 0 18 0" /></>} />;
+const IconTable = (p) => <Icon {...p} path={<><path d="M12 3v18" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /></>} />;
+const IconBrain = (p) => <Icon {...p} path={<><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></>} />;
  
 /* ---------- Dados ---------- */
 const TECHS = ["Node.js", "React.js", "Next.js", "JavaScript (ES6+)", "MongoDB", "MySQL", "Tailwind CSS", "PHP"];
@@ -203,21 +130,9 @@ const STACK = [
 ];
  
 const OFFERS = [
-  {
-    title: "Backend & APIs RESTful",
-    desc: "Arquitetura de APIs RESTful em Node.js, modelagem de banco de dados e integrações entre sistemas.",
-    color: "purple",
-  },
-  {
-    title: "Frontend de Alta Performance",
-    desc: "Interfaces em React.js e Next.js com Tailwind CSS, focadas em performance e experiência do usuário.",
-    color: "lime",
-  },
-  {
-    title: "Integração de IA & Produtividade",
-    desc: "Consumo de APIs externas e Prompt Engineering para automatizar processos e acelerar entregas.",
-    color: "blue",
-  },
+  { title: "Backend & APIs RESTful", desc: "Arquitetura de APIs RESTful em Node.js, modelagem de banco de dados e integrações entre sistemas.", color: "purple" },
+  { title: "Frontend de Alta Performance", desc: "Interfaces em React.js e Next.js com Tailwind CSS, focadas em performance e experiência do usuário.", color: "lime" },
+  { title: "Integração de IA & Produtividade", desc: "Consumo de APIs externas e Prompt Engineering para automatizar processos e acelerar entregas.", color: "blue" },
 ];
  
 const PROJECTS = [
@@ -248,27 +163,9 @@ const PROJECTS = [
 ];
  
 const TIMELINE = [
-  {
-    period: "2024 — 2025",
-    role: "Estagiária de E-commerce",
-    org: "Euforia Fitness",
-    desc: "Atuação com ERP Bling e Mercado Livre, apoiando processos de logística e operação do e-commerce.",
-    color: "blue",
-  },
-  {
-    period: "2025 — 2026",
-    role: "Estagiária de MKT Digital / Freelancer",
-    org: "Agência InoYou",
-    desc: "Desenvolvimento de landing pages, automações e otimização de SEO para clientes da agência.",
-    color: "lime",
-  },
-  {
-    period: "Conclusão: dez/2026",
-    role: "Análise e Desenvolvimento de Sistemas",
-    org: "IFSP",
-    desc: "Formação técnica com foco em backend, banco de dados e engenharia de software.",
-    color: "purple",
-  },
+  { period: "2024 — 2025", role: "Estagiária de E-commerce", org: "Euforia Fitness", desc: "Atuação com ERP Bling e Mercado Livre, apoiando processos de logística e operação do e-commerce.", color: "blue" },
+  { period: "2025 — 2026", role: "Estagiária de MKT Digital / Freelancer", org: "Agência InoYou", desc: "Desenvolvimento de landing pages, automações e otimização de SEO para clientes da agência.", color: "lime" },
+  { period: "Conclusão: dez/2026", role: "Análise e Desenvolvimento de Sistemas", org: "IFSP", desc: "Formação técnica com foco em backend, banco de dados e engenharia de software.", color: "purple" },
 ];
  
 const colorMap = {
@@ -287,7 +184,7 @@ function Portfolio() {
   };
  
   useEffect(() => {
-    // 1. ANIMAÇÃO INICIAL (HERO) - Usando GSAP apenas para a entrada da página
+    // 1. ANIMAÇÃO INICIAL (HERO)
     if (typeof gsap !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const ctx = gsap.context(() => {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -300,22 +197,17 @@ function Portfolio() {
       }, root);
     }
  
-    // 2. ANIMAÇÃO DE SCROLL (REVELAÇÃO) - Usando Intersection Observer nativo do navegador (Não trava!)
+    // 2. ANIMAÇÃO DE SCROLL (REVELAÇÃO)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          // Para de observar depois que aparece a primeira vez
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.1, // Dispara quando 10% do elemento aparece
-      rootMargin: "0px 0px -50px 0px"
-    });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
  
     document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
- 
     return () => observer.disconnect();
   }, []);
  
@@ -350,7 +242,7 @@ function Portfolio() {
         <div className="pointer-events-none absolute top-10 -left-32 w-[28rem] h-[28rem] rounded-full bg-neon-purple/25 blur-[110px]" />
         <div className="pointer-events-none absolute top-40 right-0 w-[24rem] h-[24rem] rounded-full bg-neon-blue/20 blur-[110px]" />
  
-        <div className="relative max-w-6xl mx-auto px-6 w-full">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
           <p className="hero-eyebrow font-clash font-medium text-sm text-green-400 flex items-center gap-2 mb-6">
             {"// desenvolvedora_full_stack.jsx"}
             <span className="cursor-blink">▍</span>
@@ -362,15 +254,18 @@ function Portfolio() {
             ))}
           </h1>
  
-          <p className="hero-sub font-clash font-normal text-zinc-300 text-base md:text-xl max-w-2xl mt-8 leading-relaxed">
-            Sou <span className="text-white font-medium">Vitória Giorgini</span>, Desenvolvedora focada em Backend, integrações e Full Stack de Americana, SP.
-          </p>
+          {/* TEXTO ATUALIZADO */}
+          <div className="hero-sub mt-8 max-w-3xl">
+            <p className="font-clash font-normal text-zinc-300 text-lg md:text-xl leading-relaxed">
+              Sou <span className="font-bold text-white">Vitória Giorgini</span>, Desenvolvedora com foco em Backend, APIs e integrações, apaixonada por construir soluções que vão além de funcionar: busco desenvolver sistemas seguros, escaláveis, performáticos e bem estruturados. Minha formação está direcionada ao ecossistema Node.js, onde venho aprofundando meus conhecimentos em arquitetura de software, padrões de projeto e boas práticas de desenvolvimento. Meu objetivo é projetar e desenvolver sistemas seguros, escaláveis e de fácil manutenção, capazes de atender às necessidades reais de empresas e usuários.
+            </p>
+          </div>
  
-          {/* BOTÕES */}
-          <div className="flex flex-wrap gap-4 mt-10 mb-12">
+          {/* BOTÕES (Adicionado z-10 para garantir o clique) */}
+          <div className="relative z-20 flex flex-wrap gap-4 mt-10 mb-12">
             <button
               onClick={scrollTo("projects")}
-              className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)] font-clash text-lg"
+              className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)] font-clash text-lg cursor-pointer"
             >
               Ver Projetos
               <ArrowRight size={20} />
@@ -379,7 +274,7 @@ function Portfolio() {
               href="https://linkedin.com/in/vitoriagiorgini"
               target="_blank"
               rel="noreferrer"
-              className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border border-zinc-700 hover:border-zinc-400 hover:bg-zinc-800/50 text-zinc-200 rounded-xl transition-all duration-300 font-clash text-lg"
+              className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-zinc-900 border border-zinc-700 hover:border-zinc-400 hover:bg-zinc-800 text-zinc-200 rounded-xl transition-all duration-300 font-clash text-lg cursor-pointer"
             >
               Falar com Vitória
               <Mail size={20} />
@@ -420,7 +315,7 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* STACK E FERRAMENTAS */}
+      {}
       <section className="relative max-w-6xl mx-auto px-6 py-24 md:py-28">
         <h2 className="font-clash text-3xl md:text-5xl text-center mb-4 text-white reveal-item">
           Tecnologias e Ferramentas
@@ -464,7 +359,7 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* OFERTA */}
+      {}
       <section id="stack" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
         <p className="font-mono text-sm text-neon-blue mb-3 reveal-item">{"// o_que_eu_ofereco"}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
@@ -489,7 +384,7 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* PROJETOS */}
+      {}
       <section id="projects" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
         <p className="font-mono text-sm text-neon-purple mb-3 reveal-item">{"// projetos_em_destaque"}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
@@ -514,7 +409,6 @@ function Portfolio() {
  
         <div className="relative pl-8 md:pl-10">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10">
-            {/* Linha gradiente estática, sem animação de altura para não bugar */}
             <div className="w-full h-full bg-gradient-to-b from-neon-purple via-neon-lime to-neon-blue" />
           </div>
  
@@ -535,11 +429,11 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* FOOTER */}
+      {}
       <footer id="contact" className="relative border-t border-white/5 bg-grid">
         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[30rem] h-[20rem] rounded-full bg-neon-purple/20 blur-[120px]" />
  
-        <div className="relative max-w-6xl mx-auto px-6 py-24 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 text-center">
           <p className="font-mono text-sm text-neon-blue mb-4 reveal-item">{"// vamos_conversar"}</p>
           <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mx-auto mb-10 text-white reveal-item">
             Vamos construir algo juntos.
