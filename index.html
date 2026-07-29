@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
  
+<!-- React e Bibliotecas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
@@ -77,12 +78,12 @@
   .font-clash { font-family: 'Clash Display', sans-serif !important; }
 </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased">
+<body class="bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
  
 <div id="root"></div>
  
 <script type="text/babel" data-presets="react">
-const { useEffect, useRef, useState } = React;
+const { useEffect, useRef } = React;
  
 /* ---------- Ícones ---------- */
 const Icon = ({ path, className = "w-5 h-5", size }) => (
@@ -278,17 +279,19 @@ function Portfolio() {
   };
  
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (typeof gsap === "undefined") return;
+    // Verificação de segurança para o GSAP
+    if (typeof gsap === "undefined" || !window.ScrollTrigger) return;
     gsap.registerPlugin(ScrollTrigger);
  
     const ctx = gsap.context(() => {
-      if (reduce) {
+      // Se o usuário tiver animações reduzidas no sistema, removemos os efeitos para evitar travamento
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         gsap.set("[data-reveal]", { opacity: 1, y: 0 });
         gsap.set(".hero-word, .hero-code, .hero-cta", { opacity: 1, y: 0 });
         return;
       }
  
+      // Animação inicial segura (Hero)
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       tl.from(".hero-eyebrow", { opacity: 0, y: 16, duration: 0.5 })
         .from(".hero-word", { opacity: 0, y: 36, stagger: 0.035, duration: 0.75 }, "-=0.25")
@@ -297,20 +300,26 @@ function Portfolio() {
         .from(".hero-code", { opacity: 0, y: 28, duration: 0.7 }, "-=0.3")
         .from(".navbar", { opacity: 0, y: -12, duration: 0.5 }, "-=1.1");
  
+      // Nova animação de Scroll (Blindada contra travamentos e liberando os hovers)
       gsap.utils.toArray("[data-reveal]").forEach((el) => {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 44 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.7,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 85%" },
+            scrollTrigger: { 
+              trigger: el, 
+              start: "top 92%" // Dispara um pouco mais cedo para evitar espaços em branco
+            },
+            clearProps: "transform" // ISSO AQUI FAZ OS SEUS HOVERS DE TRANSLATE DO TAILWIND VOLTAREM A FUNCIONAR!
           }
         );
       });
  
+      // Linha do tempo
       const line = document.querySelector("[data-timeline-line]");
       if (line) {
         gsap.fromTo(
@@ -331,13 +340,21 @@ function Portfolio() {
       }
     }, root);
  
-    return () => ctx.revert();
+    // Garante que o GSAP recalcule as alturas caso a fonte demore a carregar
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 600);
+ 
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
   }, []);
  
   const heroWords = "Desenvolvendo o futuro da web, do front ao back.".split(" ");
  
   return (
-    <div ref={root} className="relative overflow-x-hidden">
+    <div ref={root} className="relative">
       {/* NAV */}
       <header className="navbar fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -349,7 +366,6 @@ function Portfolio() {
             <a href="#projects" onClick={scrollTo("projects")} className="hover:text-white transition-colors">// projetos</a>
             <a href="#background" onClick={scrollTo("background")} className="hover:text-white transition-colors">// background</a>
           </nav>
-          {/* BOTÃO DE CONTATO DA NAVBAR VAI PARA O LINKEDIN */}
           <a
             href="https://linkedin.com/in/vitoriagiorgini"
             target="_blank"
@@ -382,7 +398,7 @@ function Portfolio() {
             Sou <span className="text-white font-medium">Vitória Giorgini</span>, Desenvolvedora focada em Backend, integrações e Full Stack de Americana, SP.
           </p>
  
-          {/* BOTÕES DA HERO */}
+          {/* BOTÕES */}
           <div className="flex flex-wrap gap-4 mt-10 mb-12">
             <button
               onClick={scrollTo("projects")}
@@ -391,7 +407,6 @@ function Portfolio() {
               Ver Projetos
               <ArrowRight size={20} />
             </button>
-            {/* BOTÃO FALAR COM VITÓRIA VAI PARA O LINKEDIN */}
             <a
               href="https://linkedin.com/in/vitoriagiorgini"
               target="_blank"
@@ -470,7 +485,7 @@ function Portfolio() {
       {/* MARQUEE */}
       <section className="relative border-y border-white/5 bg-zinc-950/60 py-8 overflow-hidden">
         <div className="flex whitespace-nowrap animate-marquee">
-          {[...TECHS, ...TECHS].map((t, i) => (
+          {[...TECHS, ...TECHS, ...TECHS, ...TECHS].map((t, i) => (
             <span
               key={i}
               className={`font-mono text-sm mx-6 ${i % 3 === 0 ? "text-neon-lime" : i % 3 === 1 ? "text-neon-purple" : "text-zinc-500"}`}
@@ -506,7 +521,7 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* PROJETOS COM CARDS CLICÁVEIS */}
+      {/* PROJETOS */}
       <section id="projects" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
         <p className="font-mono text-sm text-neon-purple mb-3" data-reveal>{"// projetos_em_destaque"}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white" data-reveal>
@@ -596,7 +611,6 @@ function Portfolio() {
   );
 }
  
-/* ---------- Componente de Card de Projeto Clicável ---------- */
 function ProjectCard({ project, className = "" }) {
   const c = colorMap[project.color];
   return (
