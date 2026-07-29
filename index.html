@@ -10,12 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
  
-<!-- React e Bibliotecas -->
+<!-- React e Bibliotecas (ScrollTrigger removido para evitar travamentos) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
  
 <script>
@@ -41,7 +40,7 @@
  
 <style>
   html { scroll-behavior: smooth; }
-  body { background: #09090b; }
+  body { background: #09090b; overflow-x: hidden; }
  
   .bg-grid {
     background-image:
@@ -53,8 +52,6 @@
   .glow-purple { box-shadow: 0 0 60px -15px rgba(176,38,255,0.55); }
   .glow-lime { box-shadow: 0 0 40px -10px rgba(215,255,61,0.45); }
   .glow-blue { box-shadow: 0 0 60px -15px rgba(0,229,255,0.4); }
- 
-  .text-glow-lime { text-shadow: 0 0 24px rgba(215,255,61,0.5); }
  
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -68,22 +65,33 @@
   }
   .cursor-blink { animation: blink 1.1s step-end infinite; }
  
-  ::selection { background: #B026FF; color: #09090b; }
- 
+  /* Classe para forçar a fonte */
+  .font-clash { font-family: 'Clash Display', sans-serif !important; }
+  
+  /* Classes para a animação de scroll nativa (à prova de travamentos) */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-marquee { animation: none; }
     .cursor-blink { animation: none; }
+    .reveal-item { opacity: 1; transform: none; transition: none; }
   }
-
-  .font-clash { font-family: 'Clash Display', sans-serif !important; }
 </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
+<body class="bg-zinc-950 text-zinc-100 antialiased">
  
 <div id="root"></div>
  
 <script type="text/babel" data-presets="react">
-const { useEffect, useRef } = React;
+const { useEffect, useRef, useState } = React;
  
 /* ---------- Ícones ---------- */
 const Icon = ({ path, className = "w-5 h-5", size }) => (
@@ -279,76 +287,36 @@ function Portfolio() {
   };
  
   useEffect(() => {
-    // Verificação de segurança para o GSAP
-    if (typeof gsap === "undefined" || !window.ScrollTrigger) return;
-    gsap.registerPlugin(ScrollTrigger);
+    // 1. ANIMAÇÃO INICIAL (HERO) - Usando GSAP apenas para a entrada da página
+    if (typeof gsap !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".hero-eyebrow", { opacity: 0, y: 16, duration: 0.5 })
+          .from(".hero-word", { opacity: 0, y: 36, stagger: 0.035, duration: 0.75 }, "-=0.25")
+          .from(".hero-sub", { opacity: 0, y: 18, duration: 0.6 }, "-=0.35")
+          .from(".hero-cta", { opacity: 0, y: 18, duration: 0.6, stagger: 0.08 }, "-=0.4")
+          .from(".hero-code", { opacity: 0, y: 28, duration: 0.7 }, "-=0.3")
+          .from(".navbar", { opacity: 0, y: -12, duration: 0.5 }, "-=1.1");
+      }, root);
+    }
  
-    const ctx = gsap.context(() => {
-      // Se o usuário tiver animações reduzidas no sistema, removemos os efeitos para evitar travamento
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.set("[data-reveal]", { opacity: 1, y: 0 });
-        gsap.set(".hero-word, .hero-code, .hero-cta", { opacity: 1, y: 0 });
-        return;
-      }
- 
-      // Animação inicial segura (Hero)
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".hero-eyebrow", { opacity: 0, y: 16, duration: 0.5 })
-        .from(".hero-word", { opacity: 0, y: 36, stagger: 0.035, duration: 0.75 }, "-=0.25")
-        .from(".hero-sub", { opacity: 0, y: 18, duration: 0.6 }, "-=0.35")
-        .from(".hero-cta", { opacity: 0, y: 18, duration: 0.6, stagger: 0.08 }, "-=0.4")
-        .from(".hero-code", { opacity: 0, y: 28, duration: 0.7 }, "-=0.3")
-        .from(".navbar", { opacity: 0, y: -12, duration: 0.5 }, "-=1.1");
- 
-      // Nova animação de Scroll (Blindada contra travamentos e liberando os hovers)
-      gsap.utils.toArray("[data-reveal]").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            scrollTrigger: { 
-              trigger: el, 
-              start: "top 92%" // Dispara um pouco mais cedo para evitar espaços em branco
-            },
-            clearProps: "transform" // ISSO AQUI FAZ OS SEUS HOVERS DE TRANSLATE DO TAILWIND VOLTAREM A FUNCIONAR!
-          }
-        );
+    // 2. ANIMAÇÃO DE SCROLL (REVELAÇÃO) - Usando Intersection Observer nativo do navegador (Não trava!)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Para de observar depois que aparece a primeira vez
+          observer.unobserve(entry.target);
+        }
       });
+    }, {
+      threshold: 0.1, // Dispara quando 10% do elemento aparece
+      rootMargin: "0px 0px -50px 0px"
+    });
  
-      // Linha do tempo
-      const line = document.querySelector("[data-timeline-line]");
-      if (line) {
-        gsap.fromTo(
-          line,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            transformOrigin: "top",
-            ease: "none",
-            scrollTrigger: {
-              trigger: "[data-timeline]",
-              start: "top 75%",
-              end: "bottom 70%",
-              scrub: 0.6,
-            },
-          }
-        );
-      }
-    }, root);
+    document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
  
-    // Garante que o GSAP recalcule as alturas caso a fonte demore a carregar
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 600);
- 
-    return () => {
-      clearTimeout(timer);
-      ctx.revert();
-    };
+    return () => observer.disconnect();
   }, []);
  
   const heroWords = "Desenvolvendo o futuro da web, do front ao back.".split(" ");
@@ -454,10 +422,10 @@ function Portfolio() {
  
       {/* STACK E FERRAMENTAS */}
       <section className="relative max-w-6xl mx-auto px-6 py-24 md:py-28">
-        <h2 className="font-clash text-3xl md:text-5xl text-center mb-4 text-white" data-reveal>
+        <h2 className="font-clash text-3xl md:text-5xl text-center mb-4 text-white reveal-item">
           Tecnologias e Ferramentas
         </h2>
-        <p className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-14" data-reveal>
+        <p className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-14 reveal-item">
           As principais linguagens e ecossistemas que utilizo para construir soluções digitais.
         </p>
  
@@ -468,8 +436,8 @@ function Portfolio() {
             return (
               <div
                 key={i}
-                data-reveal
-                className={`rounded-2xl border border-white/10 bg-white/5 p-6 hover:-translate-y-2 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300`}
+                className={`reveal-item rounded-2xl border border-white/10 bg-white/5 p-6 hover:-translate-y-2 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300`}
+                style={{ transitionDelay: `${i * 50}ms` }}
               >
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 ${c.text} mb-5`}>
                   <StackIcon className="w-5 h-5" />
@@ -498,8 +466,8 @@ function Portfolio() {
  
       {/* OFERTA */}
       <section id="stack" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-blue mb-3" data-reveal>{"// o_que_eu_ofereco"}</p>
-        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white" data-reveal>
+        <p className="font-mono text-sm text-neon-blue mb-3 reveal-item">{"// o_que_eu_ofereco"}</p>
+        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
           Como eu posso ajudar o seu produto
         </h2>
  
@@ -509,8 +477,8 @@ function Portfolio() {
             return (
               <div
                 key={i}
-                data-reveal
-                className={`group rounded-2xl border border-white/10 bg-white/[0.03] p-8 hover:-translate-y-1.5 hover:${c.border} transition-all duration-300`}
+                className={`reveal-item group rounded-2xl border border-white/10 bg-white/[0.03] p-8 hover:-translate-y-1.5 hover:${c.border} transition-all duration-300`}
+                style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <span className={`inline-block w-2.5 h-2.5 rounded-full ${c.dot} mb-6`} />
                 <h3 className="font-clash text-xl mb-3 text-white">{o.title}</h3>
@@ -523,37 +491,38 @@ function Portfolio() {
  
       {/* PROJETOS */}
       <section id="projects" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-purple mb-3" data-reveal>{"// projetos_em_destaque"}</p>
-        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white" data-reveal>
+        <p className="font-mono text-sm text-neon-purple mb-3 reveal-item">{"// projetos_em_destaque"}</p>
+        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
           Projetos em destaque
         </h2>
  
         <div className="grid md:grid-cols-3 gap-6">
-          <ProjectCard project={PROJECTS[0]} className="md:col-span-2" />
+          <ProjectCard project={PROJECTS[0]} className="md:col-span-2 reveal-item" />
           <div className="flex flex-col gap-6">
-            <ProjectCard project={PROJECTS[1]} />
-            <ProjectCard project={PROJECTS[2]} />
+            <ProjectCard project={PROJECTS[1]} className="reveal-item" delay={100} />
+            <ProjectCard project={PROJECTS[2]} className="reveal-item" delay={200} />
           </div>
         </div>
       </section>
  
       {/* BACKGROUND */}
       <section id="background" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-lime mb-3" data-reveal>{"// meu_background"}</p>
-        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-20 text-white" data-reveal>
+        <p className="font-mono text-sm text-neon-lime mb-3 reveal-item">{"// meu_background"}</p>
+        <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-20 text-white reveal-item">
           De onde eu venho
         </h2>
  
-        <div data-timeline className="relative pl-8 md:pl-10">
+        <div className="relative pl-8 md:pl-10">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10">
-            <div data-timeline-line className="w-full h-full bg-gradient-to-b from-neon-purple via-neon-lime to-neon-blue" />
+            {/* Linha gradiente estática, sem animação de altura para não bugar */}
+            <div className="w-full h-full bg-gradient-to-b from-neon-purple via-neon-lime to-neon-blue" />
           </div>
  
           <div className="flex flex-col gap-16">
             {TIMELINE.map((item, i) => {
               const c = colorMap[item.color];
               return (
-                <div key={i} data-reveal className="relative">
+                <div key={i} className="reveal-item relative" style={{ transitionDelay: `${i * 150}ms` }}>
                   <span className={`absolute -left-[38px] md:-left-[46px] top-1.5 w-3 h-3 rounded-full ${c.dot} ${c.glow}`} />
                   <p className={`font-mono text-xs ${c.text} mb-2`}>{item.period}</p>
                   <h3 className="font-clash text-xl md:text-2xl text-white">{item.role}</h3>
@@ -571,12 +540,12 @@ function Portfolio() {
         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[30rem] h-[20rem] rounded-full bg-neon-purple/20 blur-[120px]" />
  
         <div className="relative max-w-6xl mx-auto px-6 py-24 text-center">
-          <p className="font-mono text-sm text-neon-blue mb-4" data-reveal>{"// vamos_conversar"}</p>
-          <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mx-auto mb-10 text-white" data-reveal>
+          <p className="font-mono text-sm text-neon-blue mb-4 reveal-item">{"// vamos_conversar"}</p>
+          <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mx-auto mb-10 text-white reveal-item">
             Vamos construir algo juntos.
           </h2>
  
-          <div className="flex items-center justify-center gap-4 mb-14" data-reveal>
+          <div className="flex items-center justify-center gap-4 mb-14 reveal-item">
             <a
               href="https://github.com/vitoriagiorgini"
               target="_blank" rel="noreferrer"
@@ -611,15 +580,15 @@ function Portfolio() {
   );
 }
  
-function ProjectCard({ project, className = "" }) {
+function ProjectCard({ project, className = "", delay = 0 }) {
   const c = colorMap[project.color];
   return (
     <a
       href={project.link}
       target="_blank"
       rel="noreferrer"
-      data-reveal
-      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] backdrop-blur-sm p-8 flex flex-col justify-between hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer ${className}`}
+      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] backdrop-blur-sm p-8 flex flex-col justify-between hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] hover:-translate-y-1.5 cursor-pointer ${className}`}
+      style={{ transitionDelay: delay > 0 ? `${delay}ms` : '0ms' }}
     >
       <div className={`pointer-events-none absolute -top-16 -right-16 w-48 h-48 rounded-full ${c.bg} opacity-[0.12] blur-3xl`} />
  
@@ -628,9 +597,9 @@ function ProjectCard({ project, className = "" }) {
           <span className={`font-mono text-xs ${c.text} border ${c.border} rounded-full px-3 py-1`}>
             {project.tag}
           </span>
-          <IconExternalLink className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
+          <IconExternalLink className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors duration-300" />
         </div>
-        <h3 className="font-clash text-2xl mt-5 mb-3 text-white group-hover:text-neon-purple transition-colors">{project.title}</h3>
+        <h3 className="font-clash text-2xl mt-5 mb-3 text-white group-hover:text-neon-purple transition-colors duration-300">{project.title}</h3>
         <p className="font-sans text-sm text-zinc-400 leading-relaxed max-w-md">{project.desc}</p>
       </div>
  
