@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vitória Giorgini — Desenvolvedora Full Stack</title>
  
-<!-- Importação da fonte por um servidor mais estável -->
+<!-- Importação da fonte Clash Display -->
 <link href="https://fonts.cdnfonts.com/css/clash-display" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -74,7 +74,6 @@
     .cursor-blink { animation: none; }
   }
 
-  /* Forçando a Clash Display */
   .font-clash { font-family: 'Clash Display', sans-serif !important; }
 </style>
 </head>
@@ -117,6 +116,13 @@ const IconArrowRight = (p) => (
   <Icon {...p} path={<>
     <path d="M5 12h14" />
     <path d="m13 6 6 6-6 6" />
+  </>} />
+);
+const IconExternalLink = (p) => (
+  <Icon {...p} path={<>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
   </>} />
 );
  
@@ -212,7 +218,7 @@ const PROJECTS = [
     desc: "Sistema full stack para gestão de candidaturas, construído com Next.js 15 e App Router. Dashboard estilo Kanban para acompanhar o funil de vagas, com autenticação de usuários.",
     tech: ["Next.js 15", "App Router", "MongoDB", "Autenticação"],
     color: "purple",
-    big: true,
+    link: "https://github.com/vitoriagiorgini/job-tracker",
   },
   {
     tag: "Landing Page",
@@ -220,6 +226,7 @@ const PROJECTS = [
     desc: "Landing page de alta conversão para agência digital, com suporte a dark e light mode.",
     tech: ["React", "Tailwind CSS", "Dark/Light Mode"],
     color: "lime",
+    link: "https://github.com/vitoriagiorgini/agency.ai",
   },
   {
     tag: "API",
@@ -227,6 +234,7 @@ const PROJECTS = [
     desc: "Arquitetura RESTful em Node.js para consulta de endereçamento, consumindo a API pública ViaCEP.",
     tech: ["Node.js", "REST API", "ViaCEP"],
     color: "blue",
+    link: "https://github.com/vitoriagiorgini/api-integracao-logistica",
   },
 ];
  
@@ -341,8 +349,11 @@ function Portfolio() {
             <a href="#projects" onClick={scrollTo("projects")} className="hover:text-white transition-colors">// projetos</a>
             <a href="#background" onClick={scrollTo("background")} className="hover:text-white transition-colors">// background</a>
           </nav>
+          {/* BOTÃO DE CONTATO DA NAVBAR VAI PARA O LINKEDIN */}
           <a
-            href="mailto:vibeatrizg@gmail.com"
+            href="https://linkedin.com/in/vitoriagiorgini"
+            target="_blank"
+            rel="noreferrer"
             className="font-mono text-xs px-4 py-2 rounded-full border border-neon-purple/50 text-neon-purple hover:bg-neon-purple hover:text-zinc-950 transition-colors"
           >
             contato
@@ -371,7 +382,7 @@ function Portfolio() {
             Sou <span className="text-white font-medium">Vitória Giorgini</span>, Desenvolvedora focada em Backend, integrações e Full Stack de Americana, SP.
           </p>
  
-          {/* BOTÕES */}
+          {/* BOTÕES DA HERO */}
           <div className="flex flex-wrap gap-4 mt-10 mb-12">
             <button
               onClick={scrollTo("projects")}
@@ -380,8 +391,11 @@ function Portfolio() {
               Ver Projetos
               <ArrowRight size={20} />
             </button>
+            {/* BOTÃO FALAR COM VITÓRIA VAI PARA O LINKEDIN */}
             <a
-              href="mailto:vibeatrizg@gmail.com"
+              href="https://linkedin.com/in/vitoriagiorgini"
+              target="_blank"
+              rel="noreferrer"
               className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border border-zinc-700 hover:border-zinc-400 hover:bg-zinc-800/50 text-zinc-200 rounded-xl transition-all duration-300 font-clash text-lg"
             >
               Falar com Vitória
@@ -492,7 +506,7 @@ function Portfolio() {
         </div>
       </section>
  
-      {/* PROJETOS */}
+      {/* PROJETOS COM CARDS CLICÁVEIS */}
       <section id="projects" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
         <p className="font-mono text-sm text-neon-purple mb-3" data-reveal>{"// projetos_em_destaque"}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white" data-reveal>
@@ -582,20 +596,27 @@ function Portfolio() {
   );
 }
  
+/* ---------- Componente de Card de Projeto Clicável ---------- */
 function ProjectCard({ project, className = "" }) {
   const c = colorMap[project.color];
   return (
-    <div
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noreferrer"
       data-reveal
-      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] backdrop-blur-sm p-8 flex flex-col justify-between hover:border-white/20 transition-all duration-300 ${className}`}
+      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] backdrop-blur-sm p-8 flex flex-col justify-between hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer ${className}`}
     >
       <div className={`pointer-events-none absolute -top-16 -right-16 w-48 h-48 rounded-full ${c.bg} opacity-[0.12] blur-3xl`} />
  
       <div className="relative">
-        <span className={`font-mono text-xs ${c.text} border ${c.border} rounded-full px-3 py-1`}>
-          {project.tag}
-        </span>
-        <h3 className="font-clash text-2xl mt-5 mb-3 text-white">{project.title}</h3>
+        <div className="flex items-center justify-between">
+          <span className={`font-mono text-xs ${c.text} border ${c.border} rounded-full px-3 py-1`}>
+            {project.tag}
+          </span>
+          <IconExternalLink className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
+        </div>
+        <h3 className="font-clash text-2xl mt-5 mb-3 text-white group-hover:text-neon-purple transition-colors">{project.title}</h3>
         <p className="font-sans text-sm text-zinc-400 leading-relaxed max-w-md">{project.desc}</p>
       </div>
  
@@ -606,7 +627,7 @@ function ProjectCard({ project, className = "" }) {
           </span>
         ))}
       </div>
-    </div>
+    </a>
   );
 }
  
