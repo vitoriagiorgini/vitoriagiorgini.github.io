@@ -120,41 +120,113 @@ const IconBrain = (p) => <Icon {...p} path={<><path d="M9.5 2A2.5 2.5 0 0 1 12 4
 const TECHS = ["Node.js", "TypeScript", "Express.js", "PostgreSQL", "REST APIs", "SQL", "Clean Code", "SOLID"];
  
 const STACK = [
-  { title: "Node.js", desc: "Building scalable, asynchronous, and event-driven server-side applications and microservices.", icon: IconServer, color: "lime" },
-  { title: "TypeScript", desc: "Enforcing static typing to deliver predictable, bug-resistant, and highly maintainable codebases.", icon: IconBraces, color: "blue" },
-  { title: "Express.js", desc: "Architecting efficient RESTful API routing, robust middleware pipelines, and controller logic.", icon: IconCode, color: "purple" },
-  { title: "PostgreSQL & SQL", desc: "Designing relational database schemas, writing complex queries, and ensuring strict data integrity.", icon: IconDatabase, color: "lime" },
-  { title: "Software Architecture", desc: "Applying Layered Architecture, Clean Code, and SOLID principles for enterprise-grade solutions.", icon: IconBrain, color: "blue" },
-  { title: "Frontend Integration", desc: "Leveraging React.js and Next.js knowledge to build seamless APIs that front-end teams love to consume.", icon: IconTable, color: "purple" },
+  { 
+    title: "Node.js", 
+    desc: {
+      en: "Building scalable, asynchronous, and event-driven server-side applications and microservices.",
+      pt: "Construindo aplicações do lado do servidor e microsserviços escaláveis, assíncronos e orientados a eventos."
+    }, 
+    icon: IconServer, color: "lime" 
+  },
+  { 
+    title: "TypeScript", 
+    desc: {
+      en: "Enforcing static typing to deliver predictable, bug-resistant, and highly maintainable codebases.",
+      pt: "Aplicando tipagem estática para entregar bases de código previsíveis, resistentes a bugs e de fácil manutenção."
+    }, 
+    icon: IconBraces, color: "blue" 
+  },
+  { 
+    title: "Express.js", 
+    desc: {
+      en: "Architecting efficient RESTful API routing, robust middleware pipelines, and controller logic.",
+      pt: "Arquitetando rotas de API RESTful eficientes, pipelines de middleware robustos e lógica de controllers."
+    }, 
+    icon: IconCode, color: "purple" 
+  },
+  { 
+    title: "PostgreSQL & SQL", 
+    desc: {
+      en: "Designing relational database schemas, writing complex queries, and ensuring strict data integrity.",
+      pt: "Projetando schemas de banco de dados relacionais, escrevendo queries complexas e garantindo a integridade dos dados."
+    }, 
+    icon: IconDatabase, color: "lime" 
+  },
+  { 
+    title: "Software Architecture", 
+    desc: {
+      en: "Applying Layered Architecture, Clean Code, and SOLID principles for enterprise-grade solutions.",
+      pt: "Aplicando Arquitetura em Camadas, Clean Code e princípios SOLID para soluções de nível corporativo."
+    }, 
+    icon: IconBrain, color: "blue" 
+  },
+  { 
+    title: "Frontend Integration", 
+    desc: {
+      en: "Leveraging React.js and Next.js knowledge to build seamless APIs that front-end teams love to consume.",
+      pt: "Utilizando conhecimentos em React.js e Next.js para construir APIs integráveis que os times de front-end adoram consumir."
+    }, 
+    icon: IconTable, color: "purple" 
+  },
 ];
  
 const OFFERS = [
-  { title: "API Development & Integration", desc: "Designing and implementing secure RESTful APIs using Node.js and Express, ensuring fast and reliable communication between services.", color: "purple" },
-  { title: "Database & Data Modeling", desc: "Structuring relational databases with PostgreSQL, writing optimized SQL queries, and maintaining complex data relationships.", color: "lime" },
-  { title: "Scalable Architecture Design", desc: "Applying backend engineering best practices like SOLID and Layered Architecture to deliver maintainable, future-proof code.", color: "blue" },
+  { 
+    title: { en: "API Development & Integration", pt: "Desenvolvimento e Integração de APIs" }, 
+    desc: {
+      en: "Designing and implementing secure RESTful APIs using Node.js and Express, ensuring fast and reliable communication between services.",
+      pt: "Projetando e implementando APIs RESTful seguras com Node.js e Express, garantindo comunicação rápida e confiável entre serviços."
+    }, 
+    color: "purple" 
+  },
+  { 
+    title: { en: "Database & Data Modeling", pt: "Banco de Dados e Modelagem" }, 
+    desc: {
+      en: "Structuring relational databases with PostgreSQL, writing optimized SQL queries, and maintaining complex data relationships.",
+      pt: "Estruturando bancos de dados relacionais com PostgreSQL, escrevendo queries SQL otimizadas e mantendo relacionamentos complexos de dados."
+    }, 
+    color: "lime" 
+  },
+  { 
+    title: { en: "Scalable Architecture Design", pt: "Design de Arquitetura Escalável" }, 
+    desc: {
+      en: "Applying backend engineering best practices like SOLID and Layered Architecture to deliver maintainable, future-proof code.",
+      pt: "Aplicando boas práticas de engenharia backend como SOLID e Arquitetura em Camadas para entregar código sustentável e à prova do futuro."
+    }, 
+    color: "blue" 
+  },
 ];
  
 const PROJECTS = [
   {
-    tag: "Backend API",
-    title: "Logistics Integration API",
-    desc: "RESTful API built with Node.js to handle address resolutions by consuming the public ViaCEP service. Developed with a strong focus on clean controllers, decoupled services, and error handling.",
+    tag: { en: "Backend API", pt: "API Backend" },
+    title: { en: "Logistics Integration API", pt: "API de Integração Logística" },
+    desc: {
+      en: "RESTful API built with Node.js to handle address resolutions by consuming the public ViaCEP service. Developed with a strong focus on clean controllers, decoupled services, and error handling.",
+      pt: "API RESTful construída com Node.js para resolução de endereços consumindo o serviço público ViaCEP. Desenvolvida com forte foco em controllers limpos, serviços desacoplados e tratamento de erros."
+    },
     tech: ["Node.js", "Express", "REST API", "Architecture"],
     color: "blue",
     link: "https://github.com/vitoriagiorgini/API-Correios",
   },
   {
-    tag: "Full Stack",
-    title: "Job Application Tracker",
-    desc: "Kanban-style tracking system built with Next.js and MongoDB. Highlighted by its robust server actions, secure user authentication logic, and seamless database integration.",
+    tag: { en: "Full Stack", pt: "Full Stack" },
+    title: { en: "Job Application Tracker", pt: "Rastreador de Vagas" },
+    desc: {
+      en: "Kanban-style tracking system built with Next.js and MongoDB. Highlighted by its robust server actions, secure user authentication logic, and seamless database integration.",
+      pt: "Sistema de rastreamento estilo Kanban construído com Next.js e MongoDB. Destaca-se por suas server actions robustas, lógica segura de autenticação de usuários e integração perfeita com o banco de dados."
+    },
     tech: ["Next.js", "MongoDB", "Auth", "Backend Logic"],
     color: "purple",
     link: "https://github.com/vitoriagiorgini/job-tracker",
   },
   {
-    tag: "Frontend",
-    title: "Agency.ai Landing Page",
-    desc: "High-conversion UI interface. Built to deepen my understanding of how front-end applications consume backend services and state management.",
+    tag: { en: "Frontend", pt: "Frontend" },
+    title: { en: "Agency.ai Landing Page", pt: "Landing Page Agency.ai" },
+    desc: {
+      en: "High-conversion UI interface. Built to deepen my understanding of how front-end applications consume backend services and state management.",
+      pt: "Interface UI de alta conversão. Construída para aprofundar meu entendimento de como as aplicações front-end consomem serviços backend e gerenciam estados."
+    },
     tech: ["React", "Tailwind CSS", "UI/UX"],
     color: "lime",
     link: "https://github.com/vitoriagiorgini/chatbot-ai",
@@ -162,9 +234,36 @@ const PROJECTS = [
 ];
  
 const TIMELINE = [
-  { period: "Expected: Dec 2026", role: "Systems Analysis and Development", org: "IFSP", desc: "Technical degree with a rigorous emphasis on backend development, relational database modeling, data structures, and foundational software engineering principles.", color: "purple" },
-  { period: "2025 — 2026", role: "Freelance Web Developer", org: "Agência InoYou", desc: "Developed dynamic web pages and automated technical workflows for agency clients, bridging the gap between business requirements and technical implementation.", color: "lime" },
-  { period: "2024 — 2025", role: "E-commerce Operations Intern", org: "Euforia Fitness", desc: "Managed ERP (Bling) operations and marketplace integrations, gaining practical, real-world insight into logistics APIs, data flow, and system synchronization.", color: "blue" },
+  { 
+    period: { en: "Expected: Dec 2026", pt: "Previsão: Dez 2026" }, 
+    role: { en: "Systems Analysis and Development", pt: "Análise e Desenvolvimento de Sistemas" }, 
+    org: "IFSP", 
+    desc: {
+      en: "Technical degree with a rigorous emphasis on backend development, relational database modeling, data structures, and foundational software engineering principles.",
+      pt: "Graduação tecnológica com ênfase rigorosa em desenvolvimento backend, modelagem de bancos de dados relacionais, estruturas de dados e princípios fundamentais de engenharia de software."
+    }, 
+    color: "purple" 
+  },
+  { 
+    period: { en: "2025 — 2026", pt: "2025 — 2026" }, 
+    role: { en: "Freelance Web Developer", pt: "Desenvolvedora Web Freelancer" }, 
+    org: "Agência InoYou", 
+    desc: {
+      en: "Developed dynamic web pages and automated technical workflows for agency clients, bridging the gap between business requirements and technical implementation.",
+      pt: "Desenvolvi páginas dinâmicas e automatizei fluxos técnicos para clientes da agência, conectando requisitos de negócios à implementação técnica."
+    }, 
+    color: "lime" 
+  },
+  { 
+    period: { en: "2024 — 2025", pt: "2024 — 2025" }, 
+    role: { en: "E-commerce Operations Intern", pt: "Estagiária de Operações E-commerce" }, 
+    org: "Euforia Fitness", 
+    desc: {
+      en: "Managed ERP (Bling) operations and marketplace integrations, gaining practical, real-world insight into logistics APIs, data flow, and system synchronization.",
+      pt: "Gerenciei operações de ERP (Bling) e integrações de marketplace, ganhando visão prática e real sobre APIs de logística, fluxo de dados e sincronização de sistemas."
+    }, 
+    color: "blue" 
+  },
 ];
  
 const colorMap = {
@@ -176,6 +275,7 @@ const colorMap = {
 /* ---------- Componente principal ---------- */
 function Portfolio() {
   const root = useRef(null);
+  const [lang, setLang] = useState('en');
  
   const scrollTo = (id) => (e) => {
     e.preventDefault();
@@ -210,7 +310,10 @@ function Portfolio() {
     return () => observer.disconnect();
   }, []);
  
-  const heroWords = "Architecting robust APIs and scalable backend solutions.".split(" ");
+  const heroWords = (lang === 'en' 
+    ? "Building reliable backend solutions with Node.js and TypeScript." 
+    : "Construindo soluções backend confiáveis com Node.js e TypeScript."
+  ).split(" ");
  
   return (
     <div ref={root} className="relative">
@@ -221,18 +324,37 @@ function Portfolio() {
             <span className="text-neon-lime font-mono">{"<"}</span>VG<span className="text-neon-lime font-mono">{"/>"}</span>
           </a>
           <nav className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-zinc-400">
-            <a href="#stack" onClick={scrollTo("stack")} className="hover:text-white transition-colors">// stack</a>
-            <a href="#projects" onClick={scrollTo("projects")} className="hover:text-white transition-colors">// projects</a>
-            <a href="#background" onClick={scrollTo("background")} className="hover:text-white transition-colors">// background</a>
+            <a href="#stack" onClick={scrollTo("stack")} className="hover:text-white transition-colors">{lang === 'en' ? '// stack' : '// tecnologias'}</a>
+            <a href="#projects" onClick={scrollTo("projects")} className="hover:text-white transition-colors">{lang === 'en' ? '// projects' : '// projetos'}</a>
+            <a href="#background" onClick={scrollTo("background")} className="hover:text-white transition-colors">{lang === 'en' ? '// background' : '// jornada'}</a>
           </nav>
-          <a
-            href="https://linkedin.com/in/vitoriagiorgini"
-            target="_blank"
-            rel="noreferrer"
-            className="font-mono text-xs px-4 py-2 rounded-full border border-neon-purple/50 text-neon-purple hover:bg-neon-purple hover:text-zinc-950 transition-colors"
-          >
-            contact
-          </a>
+          
+          <div className="flex items-center gap-4">
+            {/* Botão de Tradução (Toggle) */}
+            <div className="hidden sm:flex items-center p-1 bg-zinc-900 border border-white/10 rounded-full">
+              <button 
+                onClick={() => setLang('pt')} 
+                className={`font-mono text-[10px] px-2.5 py-1 rounded-full transition-all ${lang === 'pt' ? 'bg-white/10 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              >
+                PT
+              </button>
+              <button 
+                onClick={() => setLang('en')} 
+                className={`font-mono text-[10px] px-2.5 py-1 rounded-full transition-all ${lang === 'en' ? 'bg-white/10 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              >
+                EN
+              </button>
+            </div>
+
+            <a
+              href="https://linkedin.com/in/vitoriagiorgini"
+              target="_blank"
+              rel="noreferrer"
+              className="font-mono text-xs px-4 py-2 rounded-full border border-neon-purple/50 text-neon-purple hover:bg-neon-purple hover:text-zinc-950 transition-colors"
+            >
+              {lang === 'en' ? 'contact' : 'contato'}
+            </a>
+          </div>
         </div>
       </header>
  
@@ -245,21 +367,21 @@ function Portfolio() {
           {/* Contêiner das ondas fluidas */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130vw] md:w-[100vw] h-[100vh] flex items-center justify-center opacity-80">
             
-            {/* Glow de base escuro (Roxo e Azul para profundidade) */}
-            <div className="absolute w-[80%] h-[70%] bg-neon-purple/15 blur-[120px] rounded-[100%]" />
-            <div className="absolute w-[60%] h-[60%] bg-neon-blue/10 blur-[100px] rounded-[100%] translate-x-1/4" />
+            {/* Glow de base escuro (Tons de roxo para profundidade) */}
+            <div className="absolute w-[80%] h-[70%] bg-purple-900/20 blur-[120px] rounded-[100%]" />
+            <div className="absolute w-[60%] h-[60%] bg-neon-purple/10 blur-[100px] rounded-[100%] translate-x-1/4" />
 
-            {/* Onda 1: Roxa para Azul (Curva descendente principal) */}
-            <div className="absolute w-[110%] h-[35%] bg-gradient-to-r from-transparent via-neon-purple/40 to-neon-blue/30 blur-[70px] -rotate-6 rounded-[100%]" />
+            {/* Onda 1: Roxo suave (Curva descendente principal) */}
+            <div className="absolute w-[110%] h-[35%] bg-gradient-to-r from-transparent via-neon-purple/40 to-purple-500/30 blur-[70px] -rotate-6 rounded-[100%]" />
 
-            {/* Onda 2: Azul para Verde Limão (Curva ascendente cruzando a Onda 1) */}
-            <div className="absolute w-[100%] h-[25%] bg-gradient-to-r from-neon-blue/20 via-neon-blue/40 to-neon-lime/15 blur-[60px] rotate-6 rounded-[100%] mix-blend-screen translate-x-[5%] translate-y-[10%]" />
+            {/* Onda 2: Roxo claro e fúcsia (Curva ascendente cruzando a Onda 1) */}
+            <div className="absolute w-[100%] h-[25%] bg-gradient-to-r from-purple-600/20 via-neon-purple/40 to-fuchsia-500/20 blur-[60px] rotate-6 rounded-[100%] mix-blend-screen translate-x-[5%] translate-y-[10%]" />
             
             {/* Onda 3: Linha de brilho central (Núcleo luminoso Roxo Intenso) */}
             <div className="absolute w-[70%] h-[12%] bg-gradient-to-r from-transparent via-neon-purple/50 to-transparent blur-[45px] rotate-[-2deg] rounded-[100%] mix-blend-screen" />
             
-            {/* Onda 4: Detalhe de luz suave Limão e Azul no lado direito */}
-            <div className="absolute w-[40%] h-[15%] bg-gradient-to-r from-neon-lime/10 to-neon-blue/25 blur-[50px] rotate-[4deg] rounded-[100%] mix-blend-screen translate-x-[20%]" />
+            {/* Onda 4: Detalhe de luz suave roxa no lado direito */}
+            <div className="absolute w-[40%] h-[15%] bg-gradient-to-r from-purple-400/10 to-neon-purple/25 blur-[50px] rotate-[4deg] rounded-[100%] mix-blend-screen translate-x-[20%]" />
 
           </div>
 
@@ -269,7 +391,7 @@ function Portfolio() {
  
         <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
           <p className="hero-eyebrow font-clash font-medium text-sm text-green-400 flex items-center gap-2 mb-6">
-            {"// backend_developer.ts"}
+            {lang === 'en' ? "// backend_developer.ts" : "// desenvolvedora_backend.ts"}
             <span className="cursor-blink">▍</span>
           </p>
  
@@ -282,7 +404,11 @@ function Portfolio() {
           {/* TEXTO ATUALIZADO */}
           <div className="hero-sub mt-8 max-w-3xl">
             <p className="font-clash font-normal text-zinc-300 text-lg md:text-xl leading-relaxed">
-              I'm <span className="font-medium text-white">Vitória Giorgini</span>, a Backend Developer driven by the challenge of designing secure, scalable, and highly maintainable systems. Specializing in the Node.js ecosystem, I focus on building robust RESTful APIs and optimized databases using TypeScript, Express.js, and PostgreSQL. With a strong foundation in Layered Architecture, Clean Code, and SOLID principles, my goal is to engineer reliable server-side solutions that solve complex real-world challenges.
+              {lang === 'en' ? (
+                <>I'm <span className="font-medium text-white">Vitória Giorgini</span>, a Backend Developer driven by the challenge of designing secure, scalable, and highly maintainable systems. Specializing in the Node.js ecosystem, I focus on building robust RESTful APIs and optimized databases using TypeScript, Express.js, and PostgreSQL. With a strong foundation in Layered Architecture, Clean Code, and SOLID principles, my goal is to engineer reliable server-side solutions that solve complex real-world challenges.</>
+              ) : (
+                <>Sou <span className="font-medium text-white">Vitória Giorgini</span>, Desenvolvedora Backend movida pelo desafio de projetar sistemas seguros, escaláveis e de fácil manutenção. Especializada no ecossistema Node.js, meu foco é construir APIs RESTful robustas e bancos de dados otimizados usando TypeScript, Express.js e PostgreSQL. Com forte base em Arquitetura em Camadas, Clean Code e princípios SOLID, meu objetivo é desenvolver soluções confiáveis para resolver desafios complexos do mundo real.</>
+              )}
             </p>
           </div>
  
@@ -292,7 +418,7 @@ function Portfolio() {
               onClick={scrollTo("projects")}
               className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)] font-clash text-lg cursor-pointer"
             >
-              View Projects
+              {lang === 'en' ? 'View Projects' : 'Ver Projetos'}
               <ArrowRight size={20} />
             </button>
             <a
@@ -301,7 +427,7 @@ function Portfolio() {
               rel="noreferrer"
               className="hero-cta flex items-center justify-center gap-2 px-8 py-3.5 bg-zinc-900 border border-zinc-700 hover:border-zinc-400 hover:bg-zinc-800 text-zinc-200 rounded-xl transition-all duration-300 font-clash text-lg cursor-pointer"
             >
-              Let's Talk
+              {lang === 'en' ? "Let's Talk" : 'Vamos Conversar'}
               <Mail size={20} />
             </a>
           </div>
@@ -325,13 +451,13 @@ function Portfolio() {
                   <span className="text-zinc-400">{"{"}</span>{"\n"}
                   {"  "}<span className="text-neon-blue">name</span><span className="text-zinc-400">:</span>{" "}
                   <span className="text-purple-400">"Vitória Giorgini"</span><span className="text-zinc-400">,</span>{"\n"}
-                  {"  "}<span className="text-neon-blue">focus</span><span className="text-zinc-400">:</span>{" "}
-                  <span className="text-zinc-400">[</span><span className="text-purple-400">"Backend Engineering"</span><span className="text-zinc-400">,</span>{" "}
-                  <span className="text-purple-400">"Architecture"</span><span className="text-zinc-400">],</span>{"\n"}
+                  {"  "}<span className="text-neon-blue">{lang === 'en' ? 'focus' : 'foco'}</span><span className="text-zinc-400">:</span>{" "}
+                  <span className="text-zinc-400">[</span><span className="text-purple-400">"{lang === 'en' ? 'Backend Engineering' : 'Engenharia Backend'}"</span><span className="text-zinc-400">,</span>{" "}
+                  <span className="text-purple-400">"{lang === 'en' ? 'Architecture' : 'Arquitetura'}"</span><span className="text-zinc-400">],</span>{"\n"}
                   {"  "}<span className="text-neon-blue">core_stack</span><span className="text-zinc-400">:</span>{" "}
                   <span className="text-purple-400">"Node.js, TypeScript & PostgreSQL"</span><span className="text-zinc-400">,</span>{"\n"}
-                  {"  "}<span className="text-neon-blue">location</span><span className="text-zinc-400">:</span>{" "}
-                  <span className="text-purple-400">"Americana, SP, Brazil"</span><span className="text-zinc-400">,</span>{"\n"}
+                  {"  "}<span className="text-neon-blue">{lang === 'en' ? 'location' : 'local'}</span><span className="text-zinc-400">:</span>{" "}
+                  <span className="text-purple-400">"{lang === 'en' ? 'Americana, SP, Brazil' : 'Americana, SP, Brasil'}"</span><span className="text-zinc-400">,</span>{"\n"}
                   <span className="text-zinc-400">{"};"}</span>
                 </code>
               </pre>
@@ -343,10 +469,12 @@ function Portfolio() {
       {}
       <section className="relative max-w-6xl mx-auto px-6 py-24 md:py-28">
         <h2 className="font-clash text-3xl md:text-5xl text-center mb-4 text-white reveal-item">
-          Tech Stack & Tools
+          {lang === 'en' ? 'Tech Stack & Tools' : 'Tecnologias e Ferramentas'}
         </h2>
         <p className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-14 reveal-item">
-          The core technologies and concepts I use to architect robust, scalable, and maintainable backend systems.
+          {lang === 'en' 
+            ? 'The core technologies and concepts I use to architect robust, scalable, and maintainable backend systems.'
+            : 'As principais tecnologias e conceitos que utilizo para arquitetar sistemas backend robustos, escaláveis e de fácil manutenção.'}
         </p>
  
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -363,7 +491,7 @@ function Portfolio() {
                   <StackIcon className="w-5 h-5" />
                 </div>
                 <h3 className="font-clash text-lg mb-2 text-white">{s.title}</h3>
-                <p className="font-sans text-sm text-zinc-400 leading-relaxed">{s.desc}</p>
+                <p className="font-sans text-sm text-zinc-400 leading-relaxed">{s.desc[lang]}</p>
               </div>
             );
           })}
@@ -386,9 +514,9 @@ function Portfolio() {
  
       {}
       <section id="stack" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-blue mb-3 reveal-item">{"// value_proposition"}</p>
+        <p className="font-mono text-sm text-neon-blue mb-3 reveal-item">{lang === 'en' ? '// value_proposition' : '// proposta_de_valor'}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
-          What I bring to your engineering team
+          {lang === 'en' ? 'What I bring to your engineering team' : 'O que eu agrego ao seu time de engenharia'}
         </h2>
  
         <div className="grid md:grid-cols-3 gap-6">
@@ -401,8 +529,8 @@ function Portfolio() {
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <span className={`inline-block w-2.5 h-2.5 rounded-full ${c.dot} mb-6`} />
-                <h3 className="font-clash text-xl mb-3 text-white">{o.title}</h3>
-                <p className="font-sans text-sm text-zinc-400 leading-relaxed">{o.desc}</p>
+                <h3 className="font-clash text-xl mb-3 text-white">{o.title[lang]}</h3>
+                <p className="font-sans text-sm text-zinc-400 leading-relaxed">{o.desc[lang]}</p>
               </div>
             );
           })}
@@ -411,25 +539,25 @@ function Portfolio() {
  
       {}
       <section id="projects" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-purple mb-3 reveal-item">{"// featured_projects"}</p>
+        <p className="font-mono text-sm text-neon-purple mb-3 reveal-item">{lang === 'en' ? '// featured_projects' : '// projetos_em_destaque'}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-16 text-white reveal-item">
-          Engineering in action
+          {lang === 'en' ? 'Engineering in action' : 'Engenharia na prática'}
         </h2>
  
         <div className="grid md:grid-cols-3 gap-6">
-          <ProjectCard project={PROJECTS[0]} className="md:col-span-2 reveal-item" />
+          <ProjectCard project={PROJECTS[0]} lang={lang} className="md:col-span-2 reveal-item" />
           <div className="flex flex-col gap-6">
-            <ProjectCard project={PROJECTS[1]} className="reveal-item" delay={100} />
-            <ProjectCard project={PROJECTS[2]} className="reveal-item" delay={200} />
+            <ProjectCard project={PROJECTS[1]} lang={lang} className="reveal-item" delay={100} />
+            <ProjectCard project={PROJECTS[2]} lang={lang} className="reveal-item" delay={200} />
           </div>
         </div>
       </section>
  
       {/* BACKGROUND */}
       <section id="background" className="relative max-w-6xl mx-auto px-6 py-28 md:py-32">
-        <p className="font-mono text-sm text-neon-lime mb-3 reveal-item">{"// my_background"}</p>
+        <p className="font-mono text-sm text-neon-lime mb-3 reveal-item">{lang === 'en' ? '// my_background' : '// trajetória_profissional'}</p>
         <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mb-20 text-white reveal-item">
-          My Professional Journey
+          {lang === 'en' ? 'My Professional Journey' : 'De Onde Eu Venho'}
         </h2>
  
         <div className="relative pl-8 md:pl-10">
@@ -443,10 +571,10 @@ function Portfolio() {
               return (
                 <div key={i} className="reveal-item relative" style={{ transitionDelay: `${i * 150}ms` }}>
                   <span className={`absolute -left-[38px] md:-left-[46px] top-1.5 w-3 h-3 rounded-full ${c.dot} ${c.glow}`} />
-                  <p className={`font-mono text-xs ${c.text} mb-2`}>{item.period}</p>
-                  <h3 className="font-clash text-xl md:text-2xl text-white">{item.role}</h3>
+                  <p className={`font-mono text-xs ${c.text} mb-2`}>{item.period[lang]}</p>
+                  <h3 className="font-clash text-xl md:text-2xl text-white">{item.role[lang]}</h3>
                   <p className="font-sans text-sm text-zinc-500 mb-2">{item.org}</p>
-                  <p className="font-sans text-sm text-zinc-400 max-w-xl leading-relaxed">{item.desc}</p>
+                  <p className="font-sans text-sm text-zinc-400 max-w-xl leading-relaxed">{item.desc[lang]}</p>
                 </div>
               );
             })}
@@ -459,9 +587,9 @@ function Portfolio() {
         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[30rem] h-[20rem] rounded-full bg-neon-purple/20 blur-[120px]" />
  
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 text-center">
-          <p className="font-mono text-sm text-neon-blue mb-4 reveal-item">{"// let's_connect"}</p>
+          <p className="font-mono text-sm text-neon-blue mb-4 reveal-item">{lang === 'en' ? "// let's_connect" : '// vamos_conversar'}</p>
           <h2 className="font-clash text-3xl md:text-5xl max-w-2xl mx-auto mb-10 text-white reveal-item">
-            Looking for a dedicated backend developer?
+            {lang === 'en' ? 'Looking for a dedicated backend developer?' : 'Procurando uma desenvolvedora backend dedicada?'}
           </h2>
  
           <div className="flex items-center justify-center gap-4 mb-14 reveal-item">
@@ -491,7 +619,7 @@ function Portfolio() {
           </div>
  
           <p className="font-mono text-xs text-zinc-600">
-            Vitória Giorgini · Americana, SP, Brazil · © 2026
+            Vitória Giorgini · Americana, SP, {lang === 'en' ? 'Brazil' : 'Brasil'} · © 2026
           </p>
         </div>
       </footer>
@@ -499,7 +627,7 @@ function Portfolio() {
   );
 }
  
-function ProjectCard({ project, className = "", delay = 0 }) {
+function ProjectCard({ project, className = "", delay = 0, lang = "en" }) {
   const c = colorMap[project.color];
   return (
     <a
@@ -514,12 +642,12 @@ function ProjectCard({ project, className = "", delay = 0 }) {
       <div className="relative">
         <div className="flex items-center justify-between">
           <span className={`font-mono text-xs ${c.text} border ${c.border} rounded-full px-3 py-1`}>
-            {project.tag}
+            {project.tag[lang]}
           </span>
           <IconExternalLink className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors duration-300" />
         </div>
-        <h3 className="font-clash text-2xl mt-5 mb-3 text-white group-hover:text-neon-purple transition-colors duration-300">{project.title}</h3>
-        <p className="font-sans text-sm text-zinc-400 leading-relaxed max-w-md">{project.desc}</p>
+        <h3 className="font-clash text-2xl mt-5 mb-3 text-white group-hover:text-neon-purple transition-colors duration-300">{project.title[lang]}</h3>
+        <p className="font-sans text-sm text-zinc-400 leading-relaxed max-w-md">{project.desc[lang]}</p>
       </div>
  
       <div className="relative flex flex-wrap gap-2 mt-8">
